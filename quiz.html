@@ -1,0 +1,2721 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test</title>
+<style>
+/* ========================================
+   Квиз «Оценка уровня цифровизации бизнеса»
+   granduchet.ru
+   Mobile-First | CSS v1.0
+   ======================================== */
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Panton', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Quiz Container --- */
+.granduchet-quiz {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+/* --- Font Loading --- */
+@font-face {
+    font-family: 'Panton';
+    src: url('https://granduchet.ru/wp-content/themes/granduchet/fonts/Panton-Regular.woff2') format('woff2'),
+         url('https://granduchet.ru/wp-content/themes/granduchet/fonts/Panton-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Panton';
+    src: url('https://granduchet.ru/wp-content/themes/granduchet/fonts/Panton-Bold.woff2') format('woff2'),
+         url('https://granduchet.ru/wp-content/themes/granduchet/fonts/Panton-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Panton';
+    src: url('https://granduchet.ru/wp-content/themes/granduchet/fonts/Panton-SemiBold.woff2') format('woff2'),
+         url('https://granduchet.ru/wp-content/themes/granduchet/fonts/Panton-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* --- Landing Screen --- */
+.quiz-landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #FDFAE2 0%, #FFDDD2 50%, #CEE0EE 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.quiz-landing::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background-image: 
+        linear-gradient(135deg, rgba(96,169,185,0.06) 25%, transparent 25%),
+        linear-gradient(225deg, rgba(239,187,207,0.06) 25%, transparent 25%),
+        linear-gradient(315deg, rgba(131,41,38,0.04) 25%, transparent 25%),
+        linear-gradient(45deg, rgba(155,205,224,0.06) 25%, transparent 25%);
+    background-size: 80px 80px;
+    animation: pattern-drift 30s linear infinite;
+}
+
+/* Треугольный паттерн */
+.quiz-landing-triangle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.quiz-landing-triangle-1 {
+    top: -30px;
+    right: -20px;
+    width: 0;
+    height: 0;
+    border-left: 120px solid transparent;
+    border-right: 120px solid transparent;
+    border-bottom: 200px solid rgba(96, 169, 185, 0.2);
+    animation: tri-flow-1 20s ease-in-out infinite;
+}
+
+.quiz-landing-triangle-2 {
+    bottom: 60px;
+    left: -50px;
+    width: 0;
+    height: 0;
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-bottom: 140px solid rgba(239, 187, 207, 0.25);
+    animation: tri-flow-2 25s ease-in-out infinite;
+}
+
+.quiz-landing-triangle-3 {
+    top: 30%;
+    left: 5%;
+    width: 0;
+    height: 0;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    border-bottom: 100px solid rgba(155, 205, 224, 0.18);
+    animation: tri-flow-3 22s ease-in-out infinite 3s;
+}
+
+.quiz-landing-triangle-4 {
+    top: 15%;
+    right: 10%;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 85px solid rgba(131, 41, 38, 0.15);
+    animation: tri-flow-1 18s ease-in-out infinite 1s;
+}
+
+.quiz-landing-triangle-5 {
+    bottom: 20%;
+    right: 15%;
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 70px solid rgba(206, 224, 238, 0.25);
+    animation: tri-flow-2 28s ease-in-out infinite 5s;
+}
+
+.quiz-landing-triangle-6 {
+    top: 50%;
+    right: 30%;
+    width: 0;
+    height: 0;
+    border-left: 35px solid transparent;
+    border-right: 35px solid transparent;
+    border-bottom: 60px solid rgba(255, 221, 210, 0.25);
+    animation: tri-flow-3 16s ease-in-out infinite 2s;
+}
+
+@keyframes tri-flow-1 {
+    0% { transform: rotate(15deg) translate(0, 0); opacity: 0.4; }
+    25% { transform: rotate(5deg) translate(-40px, 30px); opacity: 0.8; }
+    50% { transform: rotate(-10deg) translate(-80px, -20px); opacity: 0.3; }
+    75% { transform: rotate(10deg) translate(-20px, 50px); opacity: 0.7; }
+    100% { transform: rotate(15deg) translate(0, 0); opacity: 0.4; }
+}
+
+@keyframes tri-flow-2 {
+    0% { transform: rotate(-20deg) translate(0, 0); opacity: 0.5; }
+    25% { transform: rotate(-5deg) translate(50px, -30px); opacity: 0.9; }
+    50% { transform: rotate(15deg) translate(90px, 20px); opacity: 0.4; }
+    75% { transform: rotate(-10deg) translate(30px, -40px); opacity: 0.8; }
+    100% { transform: rotate(-20deg) translate(0, 0); opacity: 0.5; }
+}
+
+@keyframes tri-flow-3 {
+    0% { transform: rotate(45deg) translate(0, 0); opacity: 0.3; }
+    33% { transform: rotate(30deg) translate(30px, -40px); opacity: 0.7; }
+    66% { transform: rotate(60deg) translate(-30px, 20px); opacity: 0.5; }
+    100% { transform: rotate(45deg) translate(0, 0); opacity: 0.3; }
+}
+
+@keyframes pattern-drift {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.quiz-landing-illustration {
+    width: 160px;
+    height: 130px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.quiz-landing-logo {
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
+}
+
+.quiz-landing h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #832926;
+    text-align: center;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+    line-height: 1.3;
+}
+
+.quiz-landing p {
+    font-size: 16px;
+    color: #555;
+    text-align: center;
+    max-width: 500px;
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 1;
+    line-height: 1.6;
+}
+
+.quiz-btn-start {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 40px;
+    min-height: 56px;
+    min-width: 220px;
+    font-family: 'Panton', Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #832926 0%, #a13530 100%);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 6px 20px rgba(131,41,38,0.3);
+    text-decoration: none;
+}
+
+.quiz-btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(131,41,38,0.4);
+}
+
+.quiz-btn-start:active {
+    transform: translateY(0);
+}
+
+.quiz-btn-start:focus-visible {
+    outline: 3px solid #832926;
+    outline-offset: 3px;
+}
+
+
+
+/* --- Quiz Screens (Blocks) --- */
+.quiz-screen {
+    display: none;
+    padding: 24px 20px 100px;
+    min-height: calc(100vh - 56px);
+    min-height: calc(100dvh - 56px);
+    box-sizing: border-box;
+    position: relative;
+}
+
+.quiz-question:only-child {
+    max-height: calc(100vh - 180px);
+    max-height: calc(100dvh - 180px);
+    overflow-y: auto;
+}
+
+.quiz-screen.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 24px;
+}
+
+.quiz-screen.slide-left {
+    animation: slideLeft 0.3s ease forwards;
+}
+
+.quiz-screen.slide-right {
+    animation: slideRight 0.3s ease forwards;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeSlideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+}
+
+@keyframes slideLeft {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+}
+
+@keyframes slideRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+}
+
+/* --- Block Header --- */
+.quiz-block-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #CEE0EE;
+}
+
+.quiz-block-number {
+    font-size: 13px;
+    font-weight: 600;
+    color: #60A9B9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+.quiz-block-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #832926;
+    line-height: 1.3;
+}
+
+/* --- Info Banner (SEO Tips) --- */
+.quiz-info-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    background: #FDFAE2;
+    border-left: 4px solid #832926;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    position: relative;
+    animation: bannerSlide 0.4s ease;
+}
+
+@keyframes bannerSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.quiz-info-banner-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #832926;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 1px;
+}
+
+.quiz-info-banner-close {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #999;
+    transition: color 0.2s;
+    margin-left: auto;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    min-width: 28px;
+    min-height: 28px;
+}
+
+.quiz-info-banner-close:hover {
+    color: #832926;
+}
+
+.quiz-info-banner-text {
+    flex: 1;
+    padding-right: 28px;
+}
+
+/* --- Questions --- */
+.quiz-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.quiz-question {
+    background: #fff;
+    border: 1px solid #E8E8E8;
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.quiz-question.answered {
+    border-color: #60A9B9;
+    background: #f8fcfe;
+}
+
+.quiz-question-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 14px;
+    line-height: 1.4;
+}
+
+/* --- Options (Radio Buttons) --- */
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.quiz-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 15px;
+    color: #444;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.quiz-option:hover {
+    border-color: #9BCDE0;
+    background: #f0f7fb;
+}
+
+.quiz-option.selected {
+    border-color: #832926;
+    background: #FDFAE2;
+    color: #333;
+    font-weight: 600;
+}
+
+.quiz-option input[type="radio"] {
+    display: none;
+}
+
+.quiz-option-radio {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #C0C0C0;
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.quiz-option.selected .quiz-option-radio {
+    border-color: #832926;
+    background: #832926;
+}
+
+.quiz-option.selected .quiz-option-radio::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.quiz-option-text {
+    flex: 1;
+}
+
+/* --- Progress Indicator per block --- */
+.quiz-block-progress {
+    text-align: center;
+    font-size: 13px;
+    color: #999;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #E8E8E8;
+    transition: all 0.3s ease;
+}
+
+/* --- Блок завершён — деловой стиль --- */
+.quiz-block-progress.complete {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.quiz-block-progress.complete .quiz-q-progress-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: #832926;
+    letter-spacing: 0.5px;
+    animation: fadeSlideIn 400ms ease forwards;
+}
+
+/* --- Navigation --- */
+.quiz-navigation {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background: #fff;
+    border-top: 1px solid #E8E8E8;
+    padding: 12px 20px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+    display: flex;
+    gap: 10px;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+}
+
+.quiz-nav-back {
+    flex: 0 0 auto;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 12px 16px;
+    background: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Panton', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.quiz-nav-back:hover {
+    border-color: #832926;
+    color: #832926;
+}
+
+.quiz-nav-back:active {
+    transform: scale(0.97);
+}
+
+.quiz-nav-back:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    border-color: #ddd;
+    color: #bbb;
+}
+
+.quiz-nav-back:focus-visible {
+    outline: 3px solid #832926;
+    outline-offset: 2px;
+}
+
+.quiz-nav-next {
+    flex: 1;
+    min-height: 48px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #832926 0%, #a13530 100%);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Panton', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(131,41,38,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.quiz-nav-next:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(131,41,38,0.3);
+}
+
+.quiz-nav-next:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.quiz-nav-next:disabled {
+    background: #D0D0D0;
+    cursor: not-allowed;
+    box-shadow: none;
+    color: #999;
+}
+
+.quiz-nav-next:focus-visible {
+    outline: 3px solid #832926;
+    outline-offset: 2px;
+}
+
+/* --- Final Screen (Form) --- */
+.quiz-final-screen {
+    display: none;
+    padding: 24px 20px 120px;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.quiz-final-screen.active {
+    display: block;
+    animation: fadeSlideIn 0.3s ease forwards;
+}
+
+.quiz-final-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.quiz-final-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #832926;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.quiz-final-header p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.quiz-final-form {
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.quiz-form-group {
+    margin-bottom: 16px;
+}
+
+.quiz-form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.quiz-form-label .required {
+    color: #832926;
+}
+
+.quiz-form-input {
+    width: 100%;
+    padding: 14px 16px;
+    font-family: 'Panton', Arial, sans-serif;
+    font-size: 16px;
+    border: 2px solid #E0E0E0;
+    border-radius: 10px;
+    color: #333;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.quiz-form-input:focus {
+    border-color: #832926;
+    box-shadow: 0 0 0 3px rgba(131,41,38,0.1);
+}
+
+.quiz-form-input.error {
+    border-color: #d32f2f;
+    background: #fff5f5;
+}
+
+.quiz-form-input::placeholder {
+    color: #aaa;
+}
+
+.quiz-form-error {
+    font-size: 13px;
+    color: #d32f2f;
+    margin-top: 4px;
+    display: none;
+}
+
+.quiz-form-error.visible {
+    display: block;
+}
+
+/* --- Checkbox fields --- */
+.quiz-form-checkbox-group {
+    margin-bottom: 16px;
+}
+
+.quiz-form-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    padding: 10px 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.quiz-form-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.quiz-checkbox-box {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #C0C0C0;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.quiz-form-checkbox input:checked + .quiz-checkbox-box {
+    border-color: #832926;
+    background: #832926;
+}
+
+.quiz-form-checkbox input:checked + .quiz-checkbox-box::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    width: 6px;
+    height: 11px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.quiz-checkbox-text {
+    flex: 1;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.4;
+}
+
+.quiz-checkbox-text a {
+    color: #832926;
+    text-decoration: underline;
+}
+
+/* --- Final Buttons --- */
+.quiz-final-actions {
+    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.quiz-btn-primary {
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 24px;
+    font-family: 'Panton', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #832926 0%, #a13530 100%);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(131,41,38,0.25);
+    line-height: 1.3;
+}
+
+.quiz-btn-primary:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(131,41,38,0.35);
+}
+
+.quiz-btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.quiz-btn-primary:disabled {
+    background: #D0D0D0;
+    cursor: not-allowed;
+    box-shadow: none;
+    color: #999;
+}
+
+.quiz-btn-primary:focus-visible {
+    outline: 3px solid #832926;
+    outline-offset: 2px;
+}
+
+.quiz-btn-secondary {
+    width: 100%;
+    min-height: 52px;
+    padding: 14px 24px;
+    font-family: 'Panton', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #832926;
+    background: #fff;
+    border: 2px solid #832926;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.quiz-btn-secondary:hover {
+    background: #FDFAE2;
+}
+
+.quiz-btn-secondary:active {
+    transform: scale(0.98);
+}
+
+.quiz-btn-secondary:focus-visible {
+    outline: 3px solid #832926;
+    outline-offset: 2px;
+}
+
+/* --- Thank You Screen --- */
+.quiz-thankyou {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 40px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #FDFAE2 0%, #CEE0EE 100%);
+}
+
+.quiz-thankyou.active {
+    display: flex;
+    animation: fadeSlideIn 0.4s ease forwards;
+}
+
+.quiz-thankyou-icon {
+    width: 80px;
+    height: 80px;
+    background: #60A9B9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    color: #fff;
+    font-size: 40px;
+}
+
+.quiz-thankyou h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #832926;
+    margin-bottom: 14px;
+    line-height: 1.3;
+}
+
+.quiz-thankyou p {
+    font-size: 16px;
+    color: #555;
+    max-width: 480px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.quiz-thankyou .small {
+    font-size: 14px;
+    color: #888;
+    margin-top: 20px;
+}
+
+/* --- Loading state --- */
+.quiz-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* --- Scroll hint for mobile swipe --- */
+.quiz-swipe-hint {
+    display: none;
+    text-align: center;
+    font-size: 13px;
+    color: #bbb;
+    margin-top: 12px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+}
+
+.quiz-swipe-hint .arrow {
+    display: inline-block;
+    margin: 0 4px;
+}
+
+/* --- Lazy Loading Placeholder --- */
+.quiz-placeholder {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 15px;
+}
+
+/* --- Hidden SEO Block --- */
+.quiz-seo-text {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* --- Responsive: Tablet+ (768px+) --- */
+@media (min-width: 768px) {
+    .quiz-landing {
+        padding: 60px 40px;
+        border-radius: 16px;
+        min-height: auto;
+    }
+
+    .quiz-landing-logo {
+        max-width: 340px;
+    }
+
+    .quiz-landing h1 {
+        font-size: 32px;
+    }
+
+    .quiz-landing p {
+        font-size: 18px;
+    }
+
+    .quiz-btn-start {
+        min-width: 260px;
+        padding: 18px 48px;
+        font-size: 20px;
+    }
+
+    .quiz-screen {
+        padding: 32px 40px 100px;
+    }
+
+    .quiz-block-title {
+        font-size: 24px;
+    }
+
+    .quiz-question {
+        padding: 24px;
+    }
+
+    .quiz-question-text {
+        font-size: 17px;
+    }
+
+    .quiz-option {
+        padding: 14px 20px;
+        font-size: 16px;
+    }
+
+    .quiz-navigation {
+        padding: 16px 40px;
+        gap: 16px;
+    }
+
+    .quiz-nav-back {
+        min-width: 140px;
+        padding: 14px 24px;
+    }
+
+    .quiz-nav-next {
+        font-size: 18px;
+        min-height: 52px;
+    }
+
+    .quiz-final-screen {
+        padding: 40px 40px 120px;
+    }
+
+    .quiz-final-header h2 {
+        font-size: 28px;
+    }
+
+    .quiz-btn-primary,
+    .quiz-btn-secondary {
+        min-height: 56px;
+        font-size: 17px;
+    }
+
+    .quiz-thankyou h2 {
+        font-size: 28px;
+    }
+
+    .quiz-swipe-hint {
+        display: none; /* no swipe hint on desktop */
+    }
+
+    /* Two-column layout for form buttons on desktop */
+    .quiz-final-actions {
+        flex-direction: row;
+    }
+
+    .quiz-final-actions .quiz-btn-primary,
+    .quiz-final-actions .quiz-btn-secondary {
+        flex: 1;
+    }
+
+    .quiz-info-banner {
+        font-size: 15px;
+        padding: 16px 20px;
+    }
+}
+
+/* --- Responsive: Desktop (1024px+) --- */
+@media (min-width: 1024px) {
+    .granduchet-quiz {
+        margin: 40px auto;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        min-height: auto;
+    }
+
+    .quiz-screen {
+        padding: 40px 48px 100px;
+    }
+
+    .quiz-navigation {
+        padding: 16px 48px;
+    }
+}
+
+/* --- Responsive: Small Mobile (max 360px) --- */
+@media (max-width: 360px) {
+    .quiz-landing h1 {
+        font-size: 20px;
+    }
+
+    .quiz-block-title {
+        font-size: 18px;
+    }
+
+    .quiz-question-text {
+        font-size: 15px;
+    }
+
+    .quiz-option {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    .quiz-navigation {
+        padding: 10px 12px;
+    }
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* --- SEO-текст: визуально скрыт, доступен для индексации --- */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+</style>
+</head>
+<body>
+<!-- ========================================
+     Квиз «Оценка уровня цифровизации бизнеса»
+     granduchet.ru | HTML-каркас
+     Встраивается в PHP-шаблон WordPress
+     ======================================== -->
+
+<!-- КВИЗ-КОНТЕЙНЕР -->
+<div class="granduchet-quiz" itemscope itemtype="https://schema.org/Quiz">
+
+    <!-- СТАРТОВЫЙ ЭКРАН (ЛЕНДИНГ) -->
+    <div class="quiz-landing" style="display:flex;">
+        <!-- Треугольный паттерн бренда -->
+        <div class="quiz-landing-triangle quiz-landing-triangle-1"></div>
+        <div class="quiz-landing-triangle quiz-landing-triangle-2"></div>
+        <div class="quiz-landing-triangle quiz-landing-triangle-3"></div>
+        <div class="quiz-landing-triangle quiz-landing-triangle-4"></div>
+        <div class="quiz-landing-triangle quiz-landing-triangle-5"></div>
+        <div class="quiz-landing-triangle quiz-landing-triangle-6"></div>
+        <!-- Декоративная SVG-иллюстрация -->
+        <svg class="quiz-landing-illustration" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 10 L140 50 L130 100 L70 100 L60 50 Z" fill="#60A9B9" opacity="0.15"/>
+            <path d="M100 30 L125 65 L120 95 L80 95 L75 65 Z" fill="#9BCDE0" opacity="0.12"/>
+            <circle cx="50" cy="40" r="18" fill="#EFBBCF" opacity="0.15"/>
+            <circle cx="50" cy="40" r="10" fill="#EFBBCF" opacity="0.1"/>
+            <circle cx="150" cy="120" r="22" fill="#CEE0EE" opacity="0.15"/>
+            <rect x="145" y="25" width="20" height="20" rx="4" fill="#832926" opacity="0.08"/>
+            <rect x="35" y="105" width="16" height="16" rx="3" fill="#60A9B9" opacity="0.12"/>
+            <path d="M30 75 L45 60 L60 75 L45 90 Z" fill="#FFDDD2" opacity="0.15"/>
+            <line x1="100" y1="55" x2="100" y2="80" stroke="#832926" stroke-width="1.5" opacity="0.08"/>
+            <line x1="88" y1="70" x2="112" y2="70" stroke="#832926" stroke-width="1.5" opacity="0.08"/>
+        </svg>
+        <img
+            class="quiz-landing-logo"
+            src="./assets/logo-big.jpg"
+            alt="Гранд Учет"
+            width="200"
+            height="auto"
+            loading="lazy"
+        />
+        <h1>Тест «Оценка уровня цифровизации Вашего бизнеса»</h1>
+        <p>Оцените эффективность процессов за 3 минуты и получите персональные рекомендации по автоматизации от экспертов «Гранд Учет»</p>
+        <button type="button" class="quiz-btn-start" aria-label="Начать тест">Начать тест</button>
+    </div>
+
+
+
+    <!-- БЛОК 1 -->
+    <div class="quiz-screen" data-block="1" role="tabpanel">
+        <div class="quiz-block-container"></div>
+    </div>
+
+    <!-- БЛОК 2 -->
+    <div class="quiz-screen" data-block="2" role="tabpanel">
+        <div class="quiz-block-container"></div>
+    </div>
+
+    <!-- БЛОК 3 -->
+    <div class="quiz-screen" data-block="3" role="tabpanel">
+        <div class="quiz-block-container"></div>
+    </div>
+
+    <!-- БЛОК 4 -->
+    <div class="quiz-screen" data-block="4" role="tabpanel">
+        <div class="quiz-block-container"></div>
+    </div>
+
+    <!-- ПОДСКАЗКА ДЛЯ СВАЙПА (мобильные) -->
+    <div class="quiz-swipe-hint" style="display:none;">
+        <span class="arrow">←</span> Проведите влево для продолжения <span class="arrow">→</span>
+    </div>
+
+    <!-- ФИНАЛЬНЫЙ ЭКРАН: ФОРМА ЗАХВАТА -->
+    <div class="quiz-final-screen" style="display:none;">
+        <div class="quiz-final-header">
+            <h2>Мы подготовим для вас персональные рекомендации</h2>
+            <p>Укажите, пожалуйста, куда прислать результат и контакты для связи</p>
+        </div>
+
+        <form class="quiz-final-form" novalidate autocomplete="on">
+            <!-- Имя -->
+            <div class="quiz-form-group">
+                <label class="quiz-form-label" for="quiz-name">
+                    Имя <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="quiz-name"
+                    class="quiz-form-input"
+                    name="name"
+                    placeholder="Ваше имя"
+                    maxlength="100"
+                    required
+                    data-error="quiz-name-error"
+                />
+                <div class="quiz-form-error" id="quiz-name-error"></div>
+            </div>
+
+            <!-- Компания -->
+            <div class="quiz-form-group">
+                <label class="quiz-form-label" for="quiz-company">
+                    Компания <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="quiz-company"
+                    class="quiz-form-input"
+                    name="company"
+                    placeholder="Название компании"
+                    maxlength="200"
+                    required
+                    data-error="quiz-company-error"
+                />
+                <div class="quiz-form-error" id="quiz-company-error"></div>
+            </div>
+
+            <!-- E-mail -->
+            <div class="quiz-form-group">
+                <label class="quiz-form-label" for="quiz-email">
+                    E-mail <span class="required">*</span>
+                </label>
+                <input
+                    type="email"
+                    id="quiz-email"
+                    class="quiz-form-input"
+                    name="email"
+                    placeholder="example@company.ru"
+                    required
+                    autocomplete="email"
+                    data-error="quiz-email-error"
+                />
+                <div class="quiz-form-error" id="quiz-email-error"></div>
+            </div>
+
+            <!-- Телефон -->
+            <div class="quiz-form-group">
+                <label class="quiz-form-label" for="quiz-phone">
+                    Телефон <span class="required">*</span>
+                </label>
+                <input
+                    type="tel"
+                    id="quiz-phone"
+                    class="quiz-form-input"
+                    name="phone"
+                    placeholder="+7 (___) ___-__-__"
+                    required
+                    autocomplete="tel"
+                    inputmode="numeric"
+                    data-error="quiz-phone-error"
+                />
+                <div class="quiz-form-error" id="quiz-phone-error"></div>
+            </div>
+
+            <!-- Согласие на обработку ПД -->
+            <div class="quiz-form-checkbox-group">
+                <label class="quiz-form-checkbox">
+                    <input type="checkbox" id="quiz-consent" checked data-error="quiz-consent-error" />
+                    <span class="quiz-checkbox-box"></span>
+                    <span class="quiz-checkbox-text">
+                        Даю согласие на обработку персональных данных в соответствии с
+                        <a href="/privacy-policy/" target="_blank" rel="noopener">Политикой обработки персональных данных</a>
+                        <span class="required">*</span>
+                    </span>
+                </label>
+                <div class="quiz-form-error" id="quiz-consent-error"></div>
+            </div>
+
+            <!-- Ознакомление с Политикой -->
+            <div class="quiz-form-checkbox-group">
+                <label class="quiz-form-checkbox">
+                    <input type="checkbox" id="quiz-policy" checked data-error="quiz-policy-error" />
+                    <span class="quiz-checkbox-box"></span>
+                    <span class="quiz-checkbox-text">
+                        Подтверждаю, что ознакомлен(а) с
+                        <a href="/privacy-policy/" target="_blank" rel="noopener">Политикой обработки персональных данных</a>
+                        <span class="required">*</span>
+                    </span>
+                </label>
+                <div class="quiz-form-error" id="quiz-policy-error"></div>
+            </div>
+
+            <!-- Кнопки -->
+            <div class="quiz-final-actions">
+                <button type="button" id="quiz-submit-report" class="quiz-btn-primary">
+                    Получить персональный отчет по цифровой зрелости бизнеса
+                </button>
+                <button type="button" id="quiz-submit-consult" class="quiz-btn-secondary">
+                    Получить персональную консультацию по автоматизации
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- ЭКРАН БЛАГОДАРНОСТИ -->
+    <div class="quiz-thankyou" style="display:none;">
+        <div class="quiz-thankyou-icon">✓</div>
+        <h2>Благодарим Вас за участие в опросе!</h2>
+        <p>Мы получили вашу заявку и свяжемся с вами в ближайшее время.</p>
+        <p>Персональные рекомендации будут направлены на указанный e-mail.</p>
+        <p class="small">С уважением, команда «Гранд Учет»</p>
+    </div>
+
+    <!-- НАВИГАЦИЯ -->
+    <div class="quiz-navigation" style="display:none;">
+        <button type="button" class="quiz-nav-back" aria-label="Назад" disabled>
+            ← Назад
+        </button>
+        <button type="button" class="quiz-nav-next" aria-label="Далее" disabled>
+            <span class="quiz-nav-next-text">Далее</span>
+            <span class="quiz-nav-next-arrow">→</span>
+        </button>
+    </div>
+
+</div>
+
+<!-- ============================================
+     СКРЫТЫЙ SEO-ТЕКСТ (1500-2000 знаков)
+     ============================================ -->
+<div class="quiz-seo-text" aria-hidden="true">
+    <h2>Зачем нужна автоматизация бухгалтерии?</h2>
+    <p>Автоматизация бухгалтерии — ключевой шаг к повышению эффективности бизнеса. Современные решения позволяют существенно сократить время на обработку первичной документации, исключить человеческие ошибки и обеспечить прозрачность финансовых потоков. Внедрение систем автоматизации бухгалтерского учета помогает компаниям снизить операционные затраты на 30-50% и высвободить ресурсы для стратегического развития.</p>
+
+    <h2>Как цифровой документооборот экономит время?</h2>
+    <p>Электронный документооборот (ЭДО) трансформирует традиционные бизнес-процессы. С ним согласование договоров занимает часы вместо недель, а обмен первичными документами с контрагентами происходит в режиме реального времени. Цифровой документооборот полностью исключает потерю документов, автоматизирует контроль сроков и обеспечивает юридическую значимость всех операций.</p>
+
+    <h2>Преимущества КЭДО</h2>
+    <p>Кадровый электронный документооборот (КЭДО) — это новый стандарт работы с персоналом. Оформление новых сотрудников сокращается с нескольких дней до одного часа. Все кадровые документы подписываются усиленной квалифицированной электронной подписью, что полностью соответствует требованиям трудового законодательства. КЭДО особенно актуален для компаний с распределенной структурой и удаленными сотрудниками.</p>
+
+    <h2>Зачем нужна роботизация (RPA)?</h2>
+    <p>Роботизация бизнес-процессов (RPA) позволяет автоматизировать до 70% рутинных операций — от обработки входящих писем до формирования отчетности. RPA-роботы работают 24/7 без ошибок, интегрируются с любыми системами и окупаются в течение 6-12 месяцев. Цифровизация бизнеса через RPA — это не просто экономия, а качественный скачок в эффективности и конкурентоспособности.</p>
+</div>
+
+<!-- ============================================
+     JSON-LD МИКРОРАЗМЕТКА Schema.org FAQPage
+     ============================================ -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Как осуществляется загрузка банковских выписок?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Автоматически через интеграцию с банком, загружаются вручную или вводятся вручную бухгалтером."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Как формируются счета и закрывающие документы?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Автоматически согласно графику, создаются каждый документ отдельно или в Word/Excel."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Используется ли ЭДО с контрагентами?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Да, только получаем или нет."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Есть ли распознавание первички?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Автоматически в 1С, вручную из PDF/бумаги или отсутствует."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Ведете ли управленческий учет?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Да, на основе бухгалтерского, во внешних файлах вручную или нет."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Как вы организуете архив бухгалтерских документов?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Не больше 5 минут, несколько часов или несколько дней."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Сколько занимает подписание документов?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "До 1 дня, 2-5 дней или более недели."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Как организовано согласование?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Электронно в системе, виза на бумаге/e-mail или процесс не организован."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Есть ли контроль сроков согласования?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Да, частично или нет."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Как происходит оформление сотрудников?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Онлайн (КЭДО), онлайн-документы с подписью в офисе или лично в офисе."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Как подписывают кадровые документы?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Электронно (КЭДО), смешанно или все на бумаге."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Время оформления нового сотрудника?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "До 1 часа, до 4 часов или несколько дней."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Используются ли RPA роботы?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Да, пилотный уровень или нет."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Обработка входящих писем и документов?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Автоматическая, частично или отсутствует."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Интеграции между ключевыми системами?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Полная интеграция, частично или отсутствует."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Автоматическое формирование отчетов?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Да, частично или нет."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Используются ли дашборды?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Да, запланировано или нет."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Автоматические уведомления о проблемах?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Да, частично или нет."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Доля автоматических операций?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Более 50%, 20-50% или менее 20%."
+            }
+        }
+    ]
+}
+</script>
+
+<!-- СКРЫТЫЙ SEO-ТЕКСТ (для поисковой индексации) -->
+<div class="visually-hidden" aria-hidden="false">
+  <h2>Зачем нужна автоматизация бухгалтерии?</h2>
+  <p>Автоматизация бухгалтерии исключает человеческий фактор при обработке первичной документации, разноске выписок и формировании отчетности. «Гранд Учет» помогает внедрять автоматизацию бухгалтерского учета поэтапно. Результат — сокращение сроков закрытия периода до 70%, снижение ошибок и полная прозрачность финансов. Особенно актуальна автоматизация бухгалтерии для компаний с большим объемом операций.</p>
+
+  <h2>Как цифровой документооборот экономит время?</h2>
+  <p>Электронный документооборот сокращает взаимодействие с контрагентами с дней до минут. Цифровой документооборот исключает потерю бумаг, автоматически формирует архивы и упрощает сверку взаиморасчетов. Каждый документ отслеживается, сроки подписания фиксируются, доступ к архиву — не более 5 минут. Внедрение ЭДО окупается в первые же месяцы работы.</p>
+
+  <h2>Преимущества КЭДО и кадрового ЭДО</h2>
+  <p>Автоматизация кадрового учета через КЭДО сокращает время оформления сотрудников с нескольких дней до часа. Электронный документооборот в кадровой сфере полностью законен: сотрудники подписывают документы из любой точки через браузер. КЭДО особенно выгоден распределенным компаниям и снижает нагрузку на HR-отдел.</p>
+
+  <h2>Зачем нужна роботизация процессов (RPA) в бизнесе?</h2>
+  <p>Роботизация бизнес-процессов (RPA) берет на себя рутинные операции: обработку писем, загрузку выписок, формирование отчетов. Цифровизация бизнеса через RPA высвобождает сотрудников для стратегических задач. Компании с RPA отмечают рост производительности на 30-50%. «Гранд Учет» предлагает решения по роботизации с интеграцией в 1С и полный цикл цифровой трансформации.</p>
+</div>
+
+<!-- СТИЛИ И СКРИПТЫ -->
+<link rel="stylesheet" href="./assets/quiz.css" />
+<script defer src="./assets/quiz.js"></script>
+
+<script>
+/* ========================================
+   Квиз «Оценка уровня цифровизации бизнеса»
+   granduchet.ru
+   JavaScript v1.0
+   ======================================== */
+
+(function () {
+    'use strict';
+
+    /* ============================================
+       ДАННЫЕ: 19 вопросов, 4 блока
+       ============================================ */
+    const QUIZ_DATA = [
+        {
+            id: 1,
+            title: 'Автоматизация финансового и бухгалтерского учета',
+            questions: [
+                {
+                    id: 'q1',
+                    text: 'Как осуществляется загрузка банковских выписок?',
+                    options: [
+                        'Автоматически через интеграцию с банком',
+                        'Загружаются вручную',
+                        'Вводятся вручную бухгалтером'
+                    ]
+                },
+                {
+                    id: 'q2',
+                    text: 'Как формируются счета и закрывающие документы?',
+                    options: [
+                        'Автоматически согласно графику',
+                        'Создаем каждый документ отдельно',
+                        'Создаем в Word/Excel'
+                    ]
+                },
+                {
+                    id: 'q3',
+                    text: 'Используется ли ЭДО с контрагентами?',
+                    options: ['Да', 'Только получаем', 'Нет']
+                },
+                {
+                    id: 'q4',
+                    text: 'Есть ли распознавание первички?',
+                    options: ['Автоматически в 1С', 'Вручную из PDF/бумаги', 'Нет, теряются']
+                },
+                {
+                    id: 'q5',
+                    text: 'Ведете ли управленческий учет?',
+                    options: [
+                        'Да, на основе бухгалтерского',
+                        'Да, во внешних файлах вручную',
+                        'Нет'
+                    ]
+                }
+            ]
+        },
+        {
+            id: 2,
+            title: 'Документооборот и цифровые документы',
+            questions: [
+                {
+                    id: 'q6',
+                    text: 'Как вы организуете архив бухгалтерских документов?',
+                    options: ['Не больше 5 минут', 'Несколько часов', 'Несколько дней']
+                },
+                {
+                    id: 'q7',
+                    text: 'Сколько занимает подписание документов?',
+                    options: ['До 1 дня', '2-5 дней', 'Более недели']
+                },
+                {
+                    id: 'q8',
+                    text: 'Как организовано согласование?',
+                    options: [
+                        'Электронно в системе',
+                        'Виза на бумаге/e-mail',
+                        'Процесс не организован'
+                    ]
+                },
+                {
+                    id: 'q9',
+                    text: 'Есть ли контроль сроков согласования?',
+                    options: ['Да', 'Частично', 'Нет']
+                }
+            ]
+        },
+        {
+            id: 3,
+            title: 'Кадровые процессы и цифровое трудоустройство',
+            questions: [
+                {
+                    id: 'q10',
+                    text: 'Как происходит оформление сотрудников?',
+                    options: ['Онлайн (КЭДО)', 'Онлайн-документы, подпись в офисе', 'Лично в офисе']
+                },
+                {
+                    id: 'q11',
+                    text: 'Как подписывают кадровые документы?',
+                    options: ['Электронно (КЭДО)', 'Смешанно', 'Все на бумаге']
+                },
+                {
+                    id: 'q12',
+                    text: 'Время оформления нового сотрудника?',
+                    options: ['До 1 часа', 'До 4 часов', 'Несколько дней']
+                }
+            ]
+        },
+        {
+            id: 4,
+            title: 'Роботизация и цифровые сервисы',
+            questions: [
+                {
+                    id: 'q13',
+                    text: 'Используются ли RPA роботы?',
+                    options: ['Да', 'Пилотный уровень', 'Нет']
+                },
+                {
+                    id: 'q14',
+                    text: 'Обработка входящих писем и документов?',
+                    options: ['Да, автоматическая', 'Частично', 'Нет']
+                },
+                {
+                    id: 'q15',
+                    text: 'Интеграции между ключевыми системами?',
+                    options: ['Полная интеграция', 'Частично', 'Нет интеграции']
+                },
+                {
+                    id: 'q16',
+                    text: 'Автоматическое формирование отчетов?',
+                    options: ['Да', 'Частично', 'Нет']
+                },
+                {
+                    id: 'q17',
+                    text: 'Используются ли дашборды?',
+                    options: ['Да', 'Запланировано', 'Нет']
+                },
+                {
+                    id: 'q18',
+                    text: 'Автоматические уведомления о проблемах?',
+                    options: ['Да', 'Частично', 'Нет']
+                },
+                {
+                    id: 'q19',
+                    text: 'Доля автоматических операций?',
+                    options: ['Более 50%', '20-50%', 'Менее 20%']
+                }
+            ]
+        }
+    ];
+
+    /* ============================================
+       SEO-ПОДСКАЗКИ (инфо-баннеры)
+       ============================================ */
+    const BANNER_TEXTS = {
+        1: 'Роботизация разноски выписок экономит до 40% времени бухгалтера и исключает ошибки в назначении платежа.',
+        2: 'Внедрение электронного документооборота сокращает расходы на курьеров и архивы, а также ускоряет сверку взаиморасчетов.',
+        3: 'Переход на КЭДО сокращает время оформления сотрудника с нескольких дней до одного часа и исключает бумажную волокиту.',
+        4: 'Роботизация (RPA) позволяет автоматизировать до 70% рутинных операций, освобождая время сотрудников для стратегических задач.'
+    };
+
+    /* ============================================
+       СОСТОЯНИЕ
+       ============================================ */
+    const state = {
+        currentBlock: 0,        // 0-indexed
+        currentQInBlock: [0, 0, 0, 0], // текущий вопрос в каждом блоке
+        answers: {},            // { qId: optionIndex }
+        bannerShown: {},        // { blockId: true } — не показываем повторно при возврате
+        isSubmitting: false,
+        initialized: false
+    };
+
+    /* ============================================
+       DOM ССЫЛКИ
+       ============================================ */
+    let els = {};
+
+    function cacheDom() {
+        els.quiz = document.querySelector('.granduchet-quiz');
+        els.landing = document.querySelector('.quiz-landing');
+        els.startBtn = document.querySelector('.quiz-btn-start');
+        els.screens = document.querySelectorAll('.quiz-screen');
+        els.nav = document.querySelector('.quiz-navigation');
+        els.backBtn = document.querySelector('.quiz-nav-back');
+        els.nextBtn = document.querySelector('.quiz-nav-next');
+        els.nextBtnText = els.nextBtn ? els.nextBtn.querySelector('.quiz-nav-next-text') : null;
+        els.finalScreen = document.querySelector('.quiz-final-screen');
+        els.thankyou = document.querySelector('.quiz-thankyou');
+        els.blockContainers = document.querySelectorAll('.quiz-block-container');
+        els.form = document.querySelector('.quiz-final-form');
+        els.formName = document.getElementById('quiz-name');
+        els.formCompany = document.getElementById('quiz-company');
+        els.formEmail = document.getElementById('quiz-email');
+        els.formPhone = document.getElementById('quiz-phone');
+        els.formConsent = document.getElementById('quiz-consent');
+        els.formPolicy = document.getElementById('quiz-policy');
+        els.formErrors = document.querySelectorAll('.quiz-form-error');
+        els.submitReport = document.getElementById('quiz-submit-report');
+        els.submitConsult = document.getElementById('quiz-submit-consult');
+        els.swipeHint = document.querySelector('.quiz-swipe-hint');
+    }
+
+    /* ============================================
+       РЕНДЕРИНГ ВОПРОСОВ
+       ============================================ */
+    function renderQuestions() {
+        els.blockContainers.forEach(function (container, index) {
+            var block = QUIZ_DATA[index];
+            if (!block) return;
+
+            var html = '';
+            html += '<div class="quiz-block-header">';
+            html += '  <div class="quiz-block-number">Вопрос <span class="quiz-q-counter">1</span> из ' + block.questions.length + '</div>';
+            html += '  <h2 class="quiz-block-title">' + escapeHtml(block.title) + '</h2>';
+            html += '</div>';
+
+            // Info Banner (SEO Tip)
+            html += '<div class="quiz-info-banner" data-block="' + block.id + '" style="display:none;">';
+            html += '  <span class="quiz-info-banner-icon">ℹ</span>';
+            html += '  <span class="quiz-info-banner-text">' + escapeHtml(BANNER_TEXTS[block.id] || '') + '</span>';
+            html += '  <button type="button" class="quiz-info-banner-close" aria-label="Закрыть">&times;</button>';
+            html += '</div>';
+
+            html += '<div class="quiz-questions">';
+
+            // Показываем только первый (текущий) вопрос в блоке
+            block.questions.forEach(function (q, qi) {
+                var answered = state.answers[q.id] !== undefined;
+                var isFirstUnanswered = false;
+                if (!answered && !isFirstUnanswered) {
+                    var foundUnanswered = false;
+                    for (var pi = 0; pi < qi; pi++) {
+                        if (state.answers[block.questions[pi].id] === undefined) {
+                            foundUnanswered = true;
+                            break;
+                        }
+                    }
+                    isFirstUnanswered = !foundUnanswered;
+                }
+                var showQ = answered || (qi === 0) || isFirstUnanswered || (getAnsweredCount(index) === block.questions.length);
+                if (getAnsweredCount(index) === block.questions.length) {
+                    showQ = (qi === block.questions.length - 1);
+                } else if (!answered && !isFirstUnanswered) {
+                    showQ = false;
+                }
+
+                html += '<div class="quiz-question' + (answered ? ' answered' : '') + '" data-qid="' + q.id + '" style="' + (showQ ? '' : 'display:none;') + '">';
+                html += '  <div class="quiz-question-text">' + escapeHtml(q.text) + '</div>';
+                html += '  <div class="quiz-options">';
+
+                q.options.forEach(function (opt, oi) {
+                    var selected = state.answers[q.id] === oi;
+                    html += '    <label class="quiz-option' + (selected ? ' selected' : '') + '">';
+                    html += '      <input type="radio" name="' + q.id + '" value="' + oi + '"' + (selected ? ' checked' : '') + '>';
+                    html += '      <span class="quiz-option-radio"></span>';
+                    html += '      <span class="quiz-option-text">' + escapeHtml(opt) + '</span>';
+                    html += '    </label>';
+                });
+
+                html += '  </div>';
+                html += '</div>';
+            });
+
+            html += '</div>';
+
+            html += '<div class="quiz-block-progress">';
+            html += '  <span class="quiz-q-progress-text">Вопрос ' + (getAnsweredCount(index) + 1) + ' из ' + block.questions.length + '</span>';
+            html += '</div>';
+
+            container.innerHTML = html;
+        });
+
+        // Сразу обновляем видимость вопросов
+        showCurrentQuestions();
+    }
+
+    /**
+     * Показывает текущий вопрос в каждом блоке, остальные скрывает.
+     */
+    function showCurrentQuestions() {
+        els.blockContainers.forEach(function (container, index) {
+            var block = QUIZ_DATA[index];
+            if (!block) return;
+
+            var questions = container.querySelectorAll('.quiz-question');
+            var answeredCount = getAnsweredCount(index);
+            var totalQuestions = block.questions.length;
+
+            // Если все вопросы отвечены — показываем последний (уже отвеченный)
+            if (answeredCount >= totalQuestions) {
+                questions.forEach(function (q, qi) {
+                    q.style.display = 'none';
+                });
+                var radios = container.querySelectorAll('input[type="radio"]');
+                radios.forEach(function (r) { r.disabled = true; });
+                var progressText = container.querySelector('.quiz-q-progress-text');
+                if (progressText) progressText.textContent = '✅ Блок завершён';
+                var counter = container.querySelector('.quiz-q-counter');
+                if (counter) counter.textContent = totalQuestions;
+                var progressDiv = container.querySelector('.quiz-block-progress');
+                if (progressDiv) { progressDiv.style.display = 'block'; progressDiv.classList.add('complete'); }
+
+                // Кнопка «Назад» активна — можно вернуться к предыдущему вопросу
+                els.backBtn.disabled = false;
+                return;
+            }
+
+            // Ищем первый неотвеченный вопрос
+            var firstUnanswered = -1;
+            for (var qi = 0; qi < totalQuestions; qi++) {
+                if (state.answers[block.questions[qi].id] === undefined) {
+                    firstUnanswered = qi;
+                    break;
+                }
+            }
+
+            questions.forEach(function (q, qi) {
+                // Показываем первый неотвеченный, остальные скрываем
+                q.style.display = (qi === firstUnanswered) ? 'block' : 'none';
+
+                // Если вопрос не отвечен — сбрасываем визуальное состояние
+                if (qi === firstUnanswered) {
+                    var qBlock = QUIZ_DATA[index];
+                    var qData = qBlock ? qBlock.questions[qi] : null;
+                    if (qData && state.answers[qData.id] === undefined) {
+                        q.classList.remove('answered');
+                        var opts = q.querySelectorAll('.quiz-option');
+                        opts.forEach(function (lbl) {
+                            lbl.classList.remove('selected');
+                            var inp = lbl.querySelector('input');
+                            if (inp) inp.checked = false;
+                        });
+                    }
+                }
+            });
+
+            // Обновляем счётчик
+            var counter = container.querySelector('.quiz-q-counter');
+            if (counter) {
+                counter.textContent = firstUnanswered + 1;
+            }
+            var progressText = container.querySelector('.quiz-q-progress-text');
+            if (progressText) {
+                progressText.textContent = 'Вопрос ' + (firstUnanswered + 1) + ' из ' + totalQuestions;
+            }
+
+            // Разблокируем радио
+            var radios = container.querySelectorAll('input[type="radio"]');
+            radios.forEach(function (r) { r.disabled = false; });
+
+        });
+
+        // Кнопка «Назад» — только для активного блока
+        var activeAnswered = getAnsweredCount(state.currentBlock);
+        els.backBtn.disabled = (activeAnswered <= 0);
+    }
+
+    /* ============================================
+       ВСПОМОГАТЕЛЬНЫЕ
+       ============================================ */
+    function escapeHtml(str) {
+        if (typeof str !== 'string') return '';
+        var div = document.createElement('div');
+        div.appendChild(document.createTextNode(str));
+        return div.innerHTML;
+    }
+
+    function getBlockQuestionCount(blockIndex) {
+        return QUIZ_DATA[blockIndex] ? QUIZ_DATA[blockIndex].questions.length : 0;
+    }
+
+    function getAnsweredCount(blockIndex) {
+        var block = QUIZ_DATA[blockIndex];
+        if (!block) return 0;
+        var count = 0;
+        block.questions.forEach(function (q) {
+            if (state.answers[q.id] !== undefined) count++;
+        });
+        return count;
+    }
+
+    function isBlockComplete(blockIndex) {
+        return getAnsweredCount(blockIndex) === getBlockQuestionCount(blockIndex);
+    }
+
+    function getTotalAnswered() {
+        var count = 0;
+        for (var key in state.answers) {
+            if (state.answers.hasOwnProperty(key)) count++;
+        }
+        return count;
+    }
+
+    /* ============================================
+       СТЕППЕР (навигация по блокам)
+       ============================================ */
+
+
+    /* ============================================
+       ПРОГРЕСС (общий)
+       ============================================ */
+    function updateProgress() {
+        // Заглушка — прогресс отображается внутри каждого блока
+    }
+
+    /* ============================================
+       ИНФО-БАННЕРЫ
+       ============================================ */
+    function showBanner(blockIndex) {
+        var block = QUIZ_DATA[blockIndex];
+        if (!block) return;
+
+        // Не показываем, если уже показали при первом входе
+        if (state.bannerShown[block.id]) return;
+
+        var banner = els.screens[blockIndex].querySelector('.quiz-info-banner');
+        if (banner) {
+            banner.style.display = 'flex';
+            state.bannerShown[block.id] = true;
+        }
+    }
+
+    function setupBannerClose() {
+        document.addEventListener('click', function (e) {
+            var closeBtn = e.target.closest('.quiz-info-banner-close');
+            if (closeBtn) {
+                var banner = closeBtn.closest('.quiz-info-banner');
+                if (banner) {
+                    banner.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    /* ============================================
+       НАВИГАЦИЯ
+       ============================================ */
+    function showBlock(blockIndex, direction) {
+        var totalBlocks = QUIZ_DATA.length;
+
+        if (blockIndex < 0) blockIndex = 0;
+        if (blockIndex >= totalBlocks) {
+            showFinalScreen();
+            return;
+        }
+
+        // Скрываем все блоки и финал
+        els.screens.forEach(function (s) { 
+            s.classList.remove('active', 'slide-left', 'slide-right'); 
+            s.style.display = 'none';
+        });
+        els.finalScreen.classList.remove('active');
+
+        // Показываем нужный блок
+        els.screens[blockIndex].classList.add('active');
+        els.screens[blockIndex].style.display = 'block';
+
+        // Анимация
+        if (direction === 'next') {
+            els.screens[blockIndex].style.animation = 'none';
+            els.screens[blockIndex].offsetHeight; // reflow
+            els.screens[blockIndex].style.animation = '';
+        } else if (direction === 'prev') {
+            els.screens[blockIndex].style.animation = 'none';
+            els.screens[blockIndex].offsetHeight;
+            els.screens[blockIndex].style.animation = '';
+        }
+
+        // Показываем навигацию
+        els.nav.style.display = 'flex';
+
+        // Обновляем видимость вопросов (первый неотвеченный)
+        showCurrentQuestions();
+
+        // Кнопки
+        // Кнопка «Назад» обновится в showCurrentQuestions() (активна со второго ответа)
+        els.backBtn.disabled = true;
+
+        // Обновляем текст кнопки Далее
+        var block = QUIZ_DATA[blockIndex];
+        var isLastBlock = (blockIndex === totalBlocks - 1);
+        if (els.nextBtnText) {
+            els.nextBtnText.textContent = isLastBlock ? 'Готово' : 'Далее';
+        }
+        // Добавляем иконку стрелки для промежуточных блоков
+        var arrowSpan = els.nextBtn.querySelector('.quiz-nav-next-arrow');
+        if (arrowSpan) {
+            arrowSpan.textContent = isLastBlock ? '→' : '→';
+        }
+
+        // Проверяем заполненность блока
+        updateNextButton(blockIndex);
+
+        // Показываем баннер
+        showBanner(blockIndex);
+
+        // Свайп-подсказка на мобильных
+        if (els.swipeHint) {
+            els.swipeHint.style.display = (window.innerWidth < 768 && blockIndex < totalBlocks - 1) ? 'block' : 'none';
+        }
+
+        // Обновляем прогресс
+        updateProgress();
+
+        // Прокрутка вверх
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        state.currentBlock = blockIndex;
+    }
+
+    function updateNextButton(blockIndex) {
+        var complete = isBlockComplete(blockIndex);
+        els.nextBtn.disabled = !complete;
+    }
+
+    function goNext() {
+        var blockIndex = state.currentBlock;
+        if (!isBlockComplete(blockIndex)) return;
+
+        if (blockIndex === QUIZ_DATA.length - 1) {
+            // Последний блок — показываем финал
+            showFinalScreen();
+        } else {
+            showBlock(blockIndex + 1, 'next');
+        }
+    }
+
+    function goBack() {
+        var blockIndex = state.currentBlock;
+        var block = QUIZ_DATA[blockIndex];
+        if (!block) return;
+
+        // Находим последний отвеченный вопрос
+        var lastAnswered = -1;
+        for (var qi = 0; qi < block.questions.length; qi++) {
+            if (state.answers[block.questions[qi].id] !== undefined) {
+                lastAnswered = qi;
+            }
+        }
+
+        if (lastAnswered >= 0) {
+            // Удаляем последний ответ и перерисовываем блоки
+            delete state.answers[block.questions[lastAnswered].id];
+            renderQuestions();
+            showCurrentQuestions();
+            updateNextButton(blockIndex);
+            updateProgress();
+        }
+    }
+
+    /* ============================================
+       ФИНАЛЬНЫЙ ЭКРАН
+       ============================================ */
+    function showFinalScreen() {
+        els.screens.forEach(function (s) {
+            s.classList.remove('active');
+            s.style.display = 'none';
+        });
+        els.finalScreen.classList.add('active');
+        els.finalScreen.style.display = 'block';
+
+        // Прячем кнопки навигации
+        els.nav.style.display = 'none';
+        if (els.swipeHint) els.swipeHint.style.display = 'none';
+
+        // Заполняем итоговый прогресс
+        updateProgress();
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ============================================
+       ОБРАБОТКА ВЫБОРА ОТВЕТОВ (делегирование)
+       ============================================ */
+    function setupAnswerHandler() {
+        document.addEventListener('change', function (e) {
+            var radio = e.target.closest('.quiz-options input[type="radio"]');
+            if (!radio) return;
+
+            var qid = radio.name;
+            var value = parseInt(radio.value, 10);
+
+            // Сохраняем ответ
+            state.answers[qid] = value;
+
+            // Визуальное обновление опций в этом вопросе
+            var question = radio.closest('.quiz-question');
+            if (question) {
+                question.classList.add('answered');
+                var labels = question.querySelectorAll('.quiz-option');
+                labels.forEach(function (lbl) {
+                    var inp = lbl.querySelector('input');
+                    if (inp && inp.checked) {
+                        lbl.classList.add('selected');
+                    } else {
+                        lbl.classList.remove('selected');
+                    }
+                });
+
+                // Vse voprosy vidny srazu, perekljuchenie ne nuzhno
+                // Анимация: fade out вопрос, затем показываем следующий
+                question.style.animation = 'fadeSlideOut 200ms ease forwards';
+            }
+
+            // Через 300мс показываем следующий вопрос или обновляем навигацию
+            setTimeout(function () {
+                var blockIndex = state.currentBlock;
+                var block = QUIZ_DATA[blockIndex];
+                if (!block) return;
+
+                var answeredCount = getAnsweredCount(blockIndex);
+                var totalQuestions = block.questions.length;
+
+                if (answeredCount >= totalQuestions) {
+                    // Все вопросы отвечены — не скроллим, блок остаётся на месте
+                    showCurrentQuestions();
+                    updateNextButton(blockIndex);
+                    updateProgress();
+                } else {
+                    // Есть ещё вопросы — показываем следующий
+                    showCurrentQuestions();
+                    updateProgress();
+
+                    // Анимация появления нового вопроса
+                    var container = els.blockContainers[blockIndex];
+                    if (container) {
+                        var visibleQuestion = container.querySelector('.quiz-question[style*="block"]');
+                        if (visibleQuestion) {
+                            visibleQuestion.style.animation = 'fadeSlideIn 300ms ease forwards';
+                        }
+                    }
+
+                    // Плавный скролл к следующему вопросу
+                    var container = els.blockContainers[blockIndex];
+                    if (container) {
+                        container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            }, 250);
+        });
+    }
+
+    /* ============================================
+       ТЕЛЕФОННАЯ МАСКА
+       ============================================ */
+    function setupPhoneMask() {
+        var phoneInput = els.formPhone;
+        if (!phoneInput) return;
+
+        phoneInput.addEventListener('input', function () {
+            var val = phoneInput.value.replace(/[^\d+]/g, '');
+            if (!val.startsWith('+')) {
+                val = '+7' + val.replace(/^\+?7?/, '');
+            }
+            phoneInput.value = val;
+        });
+
+        phoneInput.addEventListener('blur', function () {
+            var val = phoneInput.value;
+            if (val === '+' || val === '+7' || val === '') {
+                phoneInput.value = '';
+            } else if (!/^\+7\d/.test(val)) {
+                phoneInput.value = '+7' + val.replace(/^\+?7?/, '');
+            }
+        });
+    }
+
+    /* ============================================
+       ВАЛИДАЦИЯ ФОРМЫ
+       ============================================ */
+    function validateForm() {
+        var isValid = true;
+
+        // Имя
+        var name = els.formName.value.trim();
+        if (!name || name.length > 100) {
+            showFieldError('quiz-name-error', !name ? 'Пожалуйста, укажите ваше имя' : 'Имя должно быть не длиннее 100 символов');
+            els.formName.classList.add('error');
+            isValid = false;
+        } else {
+            hideFieldError('quiz-name-error');
+            els.formName.classList.remove('error');
+        }
+
+        // Компания
+        var company = els.formCompany.value.trim();
+        if (!company || company.length > 200) {
+            showFieldError('quiz-company-error', !company ? 'Пожалуйста, укажите название компании' : 'Название должно быть не длиннее 200 символов');
+            els.formCompany.classList.add('error');
+            isValid = false;
+        } else {
+            hideFieldError('quiz-company-error');
+            els.formCompany.classList.remove('error');
+        }
+
+        // Email
+        var email = els.formEmail.value.trim();
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+            showFieldError('quiz-email-error', 'Пожалуйста, укажите корректный e-mail');
+            els.formEmail.classList.add('error');
+            isValid = false;
+        } else {
+            hideFieldError('quiz-email-error');
+            els.formEmail.classList.remove('error');
+        }
+
+        // Телефон
+        var phone = els.formPhone.value.trim();
+        var phoneClean = phone.replace(/[^\d+]/g, '');
+        if (!phoneClean || phoneClean.length < 10) {
+            showFieldError('quiz-phone-error', 'Пожалуйста, укажите корректный номер телефона');
+            els.formPhone.classList.add('error');
+            isValid = false;
+        } else {
+            hideFieldError('quiz-phone-error');
+            els.formPhone.classList.remove('error');
+        }
+
+        // Чекбоксы
+        if (!els.formConsent.checked) {
+            showFieldError('quiz-consent-error', 'Необходимо согласие на обработку персональных данных');
+            isValid = false;
+        } else {
+            hideFieldError('quiz-consent-error');
+        }
+
+        if (!els.formPolicy.checked) {
+            showFieldError('quiz-policy-error', 'Необходимо подтвердить ознакомление с Политикой');
+            isValid = false;
+        } else {
+            hideFieldError('quiz-policy-error');
+        }
+
+        return isValid;
+    }
+
+    function showFieldError(id, msg) {
+        var el = document.getElementById(id);
+        if (el) {
+            el.textContent = msg;
+            el.classList.add('visible');
+        }
+    }
+
+    function hideFieldError(id) {
+        var el = document.getElementById(id);
+        if (el) {
+            el.classList.remove('visible');
+            el.textContent = '';
+        }
+    }
+
+    /* ============================================
+       СБОР ОТВЕТОВ ДЛЯ ОТПРАВКИ
+       ============================================ */
+    function buildFormattedAnswers() {
+        var lines = [];
+        QUIZ_DATA.forEach(function (block, bi) {
+            lines.push('');
+            lines.push('=== ' + block.title + ' ===');
+            block.questions.forEach(function (q) {
+                var answerIdx = state.answers[q.id];
+                var answerText = (answerIdx !== undefined && q.options[answerIdx]) ? q.options[answerIdx] : 'Не отвечен';
+                lines.push(q.text + ' → ' + answerText);
+            });
+        });
+        return lines.join('\n');
+    }
+
+    function buildPayload(submitType) {
+        var name = els.formName.value.trim();
+        var company = els.formCompany.value.trim();
+        var email = els.formEmail.value.trim();
+        var phone = els.formPhone.value.trim();
+
+        return {
+            action: 'granduchet_quiz_submit',
+            type: submitType, // 'report' or 'consult'
+            name: name,
+            company: company,
+            email: email,
+            phone: phone,
+            consent: els.formConsent.checked ? 1 : 0,
+            policy: els.formPolicy.checked ? 1 : 0,
+            answers: state.answers,
+            formatted: buildFormattedAnswers()
+        };
+    }
+
+    /* ============================================
+       ОТПРАВКА ФОРМЫ
+       ============================================ */
+    function submitQuiz(submitType) {
+        if (state.isSubmitting) return;
+        if (!validateForm()) return;
+
+        state.isSubmitting = true;
+
+        // Disable buttons and show loading
+        var buttons = [els.submitReport, els.submitConsult];
+        buttons.forEach(function (btn) {
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<span class="quiz-loading"></span> Отправка...';
+            }
+        });
+
+        var payload = buildPayload(submitType);
+
+        // Отправка через WordPress REST API или AJAX
+        var xhr = new XMLHttpRequest();
+        var isConsult = submitType === 'consult';
+        var defaultUrl = isConsult ? '/wp-json/granduchet-quiz/v1/consultation' : '/wp-json/granduchet-quiz/v1/submit';
+        var ajaxUrl = window.granduchetQuiz ? (isConsult ? window.granduchetQuiz.consultUrl : window.granduchetQuiz.ajaxUrl) : defaultUrl;
+
+        xhr.open('POST', ajaxUrl, true);
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        var nonce = window.granduchetQuiz ? window.granduchetQuiz.nonce : '';
+        if (nonce) {
+            xhr.setRequestHeader('X-WP-Nonce', nonce);
+        }
+
+        xhr.onload = function () {
+            state.isSubmitting = false;
+
+            if (xhr.status >= 200 && xhr.status < 300) {
+                // Яндекc.Метрика цель
+                sendYandexGoal('quiz_submit');
+
+                showThankYou();
+            } else {
+                // Ошибка — пробуем fallback через PHP-обработчик
+                fallbackSubmit(payload);
+            }
+
+            // Reset buttons
+            resetSubmitButtons();
+        };
+
+        xhr.onerror = function () {
+            state.isSubmitting = false;
+            fallbackSubmit(payload);
+            resetSubmitButtons();
+        };
+
+        // Отправляем как JSON для REST API
+        xhr.send(JSON.stringify(payload));
+    }
+
+    function fallbackSubmit(payload) {
+        // Прямая отправка на PHP-обработчик если AJAX не сработал
+        var formData = new FormData();
+        formData.append('action', 'granduchet_quiz_submit');
+        formData.append('type', payload.type);
+        formData.append('name', payload.name);
+        formData.append('company', payload.company);
+        formData.append('email', payload.email);
+        formData.append('phone', payload.phone);
+        formData.append('consent', payload.consent);
+        formData.append('policy', payload.policy);
+        formData.append('formatted', payload.formatted);
+
+        var fallbackXhr = new XMLHttpRequest();
+        fallbackXhr.open('POST', '/wp-content/themes/granduchet/quiz-handler.php', true);
+
+        fallbackXhr.onload = function () {
+            sendYandexGoal('quiz_submit');
+            showThankYou();
+        };
+
+        fallbackXhr.onerror = function () {
+            // Совсем ничего не работает — показываем спасибо
+            showThankYou();
+        };
+
+        fallbackXhr.send(formData);
+    }
+
+    function resetSubmitButtons() {
+        var buttons = [els.submitReport, els.submitConsult];
+        buttons.forEach(function (btn) {
+            if (btn) {
+                btn.disabled = false;
+            }
+        });
+        if (els.submitReport) {
+            els.submitReport.innerHTML = 'Получить персональный отчет по цифровой зрелости бизнеса';
+        }
+        if (els.submitConsult) {
+            els.submitConsult.innerHTML = 'Получить персональную консультацию по автоматизации';
+        }
+    }
+
+    /* ============================================
+       ЭКРАН БЛАГОДАРНОСТИ
+       ============================================ */
+    function showThankYou() {
+        els.finalScreen.classList.remove('active');
+        els.finalScreen.style.display = 'none';
+        els.thankyou.classList.add('active');
+        els.thankyou.style.display = 'flex';
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ============================================
+       ЯНДЕКС.МЕТРИКА
+       ============================================ */
+    function sendYandexGoal(goalName) {
+        if (typeof yaCounterXXXXXXXX !== 'undefined') {
+            try {
+                yaCounterXXXXXXXX.reachGoal(goalName);
+            } catch (e) {
+                // игнорируем
+            }
+        }
+
+        // Также пробуем dataLayer (Google Tag Manager / общий)
+        if (typeof dataLayer !== 'undefined') {
+            try {
+                dataLayer.push({ 'event': goalName });
+            } catch (e) {
+                // игнорируем
+            }
+        }
+
+        // Событие в localStorage для возможной ретроспективной отправки
+        try {
+            var events = JSON.parse(localStorage.getItem('granduchet_quiz_events') || '[]');
+            events.push({ name: goalName, time: new Date().toISOString() });
+            localStorage.setItem('granduchet_quiz_events', JSON.stringify(events));
+        } catch (e) {
+            // игнорируем
+        }
+    }
+
+    /* ============================================
+       СВАЙПЫ (горизонтальные)
+       ============================================ */
+    function setupSwipeDetection() {
+        var touchStartX = 0;
+        var touchStartY = 0;
+        var touchEndX = 0;
+        var touchEndY = 0;
+        var swiping = false;
+        var swiped = false;
+
+        document.addEventListener('touchstart', function (e) {
+            var target = e.target;
+            // Не реагируем на свайпы внутри формы или инпутов
+            if (target.closest('.quiz-final-form') || target.closest('.quiz-thankyou') || target.closest('.quiz-landing')) {
+                return;
+            }
+
+            var touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            touchEndX = touch.clientX;
+            touchEndY = touch.clientY;
+            swiping = true;
+            swiped = false;
+        }, { passive: true });
+
+        document.addEventListener('touchmove', function (e) {
+            if (!swiping) return;
+            var touch = e.touches[0];
+            touchEndX = touch.clientX;
+            touchEndY = touch.clientY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', function (e) {
+            if (!swiping || swiped) return;
+            swiping = false;
+
+            var dx = touchEndX - touchStartX;
+            var dy = touchEndY - touchStartY;
+
+            // Только горизонтальные свайпы, минимум 50px
+            if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+
+            swiped = true;
+
+            if (dx < 0 && isBlockComplete(state.currentBlock)) {
+                // Свайп влево → Далее
+                goNext();
+            } else if (dx > 0 && state.currentBlock > 0) {
+                // Свайп вправо → Назад
+                goBack();
+            }
+        }, { passive: true });
+    }
+
+    /* ============================================
+       LAZY LOADING INIT
+       ============================================ */
+    function initQuiz() {
+        if (state.initialized) return;
+        state.initialized = true;
+
+        // Отображаем вопросы
+        renderQuestions();
+
+        // Прячем лендинг, показываем 1-й блок
+        els.landing.style.display = 'none';
+
+        // Показываем навигацию
+        els.nav.style.display = 'flex';
+
+        // Показываем первый блок
+        showBlock(0, 'next');
+    }
+
+    function setupLazyLoading() {
+        // Кнопка «Начать тест» — единственный способ запуска
+        els.startBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            initQuiz();
+        });
+    }
+
+    /* ============================================
+       ИНИЦИАЛИЗАЦИЯ
+       ============================================ */
+    function init() {
+        cacheDom();
+
+        if (!els.landing || !els.startBtn) return;
+
+        // Состояние лендинга включено
+        els.landing.style.display = 'flex';
+
+        // Навигация скрыта изначально
+        els.nav.style.display = 'none';
+
+        // Скрываем все блоки и финал
+        els.screens.forEach(function (s) { s.style.display = 'none'; });
+        els.finalScreen.style.display = 'none';
+        els.thankyou.style.display = 'none';
+
+        // Устанавливаем обработчики
+        setupAnswerHandler();
+        setupBannerClose();
+        setupPhoneMask();
+        setupSwipeDetection();
+        setupLazyLoading();
+
+        // Кнопки навигации
+        els.nextBtn.addEventListener('click', goNext);
+        els.backBtn.addEventListener('click', goBack);
+
+
+
+        // Кнопки отправки
+        els.submitReport.addEventListener('click', function (e) {
+            e.preventDefault();
+            submitQuiz('report');
+        });
+
+        els.submitConsult.addEventListener('click', function (e) {
+            e.preventDefault();
+            submitQuiz('consult');
+        });
+
+        // Валидация полей в реальном времени (снимаем ошибку при вводе)
+        var formInputs = [els.formName, els.formCompany, els.formEmail, els.formPhone];
+        formInputs.forEach(function (input) {
+            if (!input) return;
+            input.addEventListener('input', function () {
+                this.classList.remove('error');
+                var errorId = this.getAttribute('data-error');
+                if (errorId) hideFieldError(errorId);
+            });
+        });
+
+        // Чекбоксы
+        [els.formConsent, els.formPolicy].forEach(function (cb) {
+            if (!cb) return;
+            cb.addEventListener('change', function () {
+                var errorId = this.getAttribute('data-error');
+                if (errorId && this.checked) hideFieldError(errorId);
+            });
+        });
+
+        // Keyboard support
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && state.initialized) {
+                var activeScreen = document.querySelector('.quiz-screen.active');
+                if (activeScreen && isBlockComplete(state.currentBlock)) {
+                    goNext();
+                }
+                if (els.finalScreen.classList.contains('active')) {
+                    // Не отправляем форму по Enter случайно
+                }
+            }
+
+            if (e.key === 'ArrowRight' && state.initialized && isBlockComplete(state.currentBlock)) {
+                goNext();
+            }
+
+            if (e.key === 'ArrowLeft' && state.initialized && state.currentBlock > 0) {
+                goBack();
+            }
+        });
+
+        console.log('Гранд Учет — Квиз цифровизации загружен');
+    }
+
+    /* ============================================
+       СТАРТ (когда DOM готов)
+       ============================================ */
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+})();
+
+</script>
+</body>
+</html>
