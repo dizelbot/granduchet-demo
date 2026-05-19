@@ -845,25 +845,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-s
         <button type="button" class="quiz-btn-start" aria-label="Начать тест">Начать тест</button>
     </div>
 
-    <!-- СТЕППЕР (горизонтальные интерактивные индикаторы) -->
-    <div class="quiz-stepper" style="display:none;">
-        <div class="quiz-step" data-step="0" role="button" tabindex="0">
-            <span class="quiz-step-num">1</span>
-            <span class="quiz-step-name">Финансы</span>
-        </div>
-        <div class="quiz-step" data-step="1" role="button" tabindex="0">
-            <span class="quiz-step-num">2</span>
-            <span class="quiz-step-name">Документы</span>
-        </div>
-        <div class="quiz-step" data-step="2" role="button" tabindex="0">
-            <span class="quiz-step-num">3</span>
-            <span class="quiz-step-name">Кадры</span>
-        </div>
-        <div class="quiz-step" data-step="3" role="button" tabindex="0">
-            <span class="quiz-step-num">4</span>
-            <span class="quiz-step-name">RPA</span>
-        </div>
-    </div>
+
 
     <!-- БЛОК 1 -->
     <div class="quiz-screen" data-block="1" role="tabpanel">
@@ -1032,28 +1014,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-s
     </div>
 
 </div>
-
-
-
-<!-- ============================================
-     JSON-LD МИКРОРАЗМЕТКА Schema.org FAQPage
-     ============================================ -->
-
-
-<!-- СКРЫТЫЙ SEO-ТЕКСТ (для поисковой индексации) -->
-<div class="visually-hidden" aria-hidden="false">
-  <h2>Зачем нужна автоматизация бухгалтерии?</h2>
-  <p>Автоматизация бухгалтерии исключает человеческий фактор при обработке первичной документации, разноске выписок и формировании отчетности. «Гранд Учет» помогает внедрять автоматизацию бухгалтерского учета поэтапно. Результат — сокращение сроков закрытия периода до 70%, снижение ошибок и полная прозрачность финансов. Особенно актуальна автоматизация бухгалтерии для компаний с большим объемом операций.</p>
-
-  <h2>Как цифровой документооборот экономит время?</h2>
-  <p>Электронный документооборот сокращает взаимодействие с контрагентами с дней до минут. Цифровой документооборот исключает потерю бумаг, автоматически формирует архивы и упрощает сверку взаиморасчетов. Каждый документ отслеживается, сроки подписания фиксируются, доступ к архиву — не более 5 минут. Внедрение ЭДО окупается в первые же месяцы работы.</p>
-
-  <h2>Преимущества КЭДО и кадрового ЭДО</h2>
-  <p>Автоматизация кадрового учета через КЭДО сокращает время оформления сотрудников с нескольких дней до часа. Электронный документооборот в кадровой сфере полностью законен: сотрудники подписывают документы из любой точки через браузер. КЭДО особенно выгоден распределенным компаниям и снижает нагрузку на HR-отдел.</p>
-
-  <h2>Зачем нужна роботизация процессов (RPA) в бизнесе?</h2>
-  <p>Роботизация бизнес-процессов (RPA) берет на себя рутинные операции: обработку писем, загрузку выписок, формирование отчетов. Цифровизация бизнеса через RPA высвобождает сотрудников для стратегических задач. Компании с RPA отмечают рост производительности на 30-50%. «Гранд Учет» предлагает решения по роботизации с интеграцией в 1С и полный цикл цифровой трансформации.</p>
-</div>
 </section>
 
 <!-- ФУТЕР -->
@@ -1062,29 +1022,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-s
     <p style="margin-top:8px;color:#999;font-size:13px;">Демо-версия для ознакомления · Опросник «Оценка уровня цифровизации»</p>
 </footer>
 
-<!-- Автоподстройка высоты iframe -->
-<script>
-(function() {
-    var frame = document.getElementById('quiz-frame');
-    if (!frame) return;
-    function resize() {
-        try {
-            var doc = frame.contentDocument || frame.contentWindow.document;
-            var h = doc.documentElement.scrollHeight || doc.body.scrollHeight;
-            frame.style.minHeight = Math.max(h, 600) + 'px';
-        } catch(e) {}
-    }
-    frame.onload = resize;
-    window.addEventListener('resize', resize);
-    // Повтор через 1с и 3с (для динамической высоты квиза)
-    setTimeout(resize, 1000);
-    setTimeout(resize, 3000);
-})();
-</script>
 
 <script>
-/* === QUIZ JAVASCRIPT === */
-(function() {
+/* === QUIZ FULL === */
 /* ========================================
    Квиз «Оценка уровня цифровизации бизнеса»
    granduchet.ru
@@ -2198,23 +2138,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-s
        СТАРТ (когда DOM готов)
        ============================================ */
 
-
-// Make init accessible
+// Make init accessible from outside
 window.granduchetInit = init;
 
-// Auto-init when ready
-(function(){
-    function r(){
-        if(window.granduchetInit) window.granduchetInit();
-    }
-    if(document.readyState === 'complete' || document.readyState === 'interactive'){
-        setTimeout(r, 50);
-    }else{
-        document.addEventListener('DOMContentLoaded', r);
-    }
 })();
 
-})();
+// Auto-init quiz
+(function(){function r(){if(window.granduchetInit)window.granduchetInit();}if(document.readyState==="complete"||document.readyState==="interactive"){setTimeout(r,50);}else{document.addEventListener("DOMContentLoaded",r);}})();
 </script>
 </body>
 </html>
