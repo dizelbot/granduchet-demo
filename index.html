@@ -556,8 +556,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-s
 </div>
 
 <!-- СТИЛИ И СКРИПТЫ -->
-<link rel="stylesheet" href="./assets/quiz.css" />
-<script defer src="./assets/quiz.js"></script></div>
+<!-- quiz CSS inline in main bundle -->
+<!-- quiz script inline in main bundle --></div>
 </section>
 
 <!-- ФУТЕР -->
@@ -1683,6 +1683,23 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-s
        ============================================ */
 })();
 
+
+// Auto-init quiz when page loads
+(function(){
+    function r(){
+        var q = document.querySelector('.granduchet-quiz');
+        if(q){
+            if(window.granduchetInit) window.granduchetInit();
+        }else{
+            setTimeout(r, 100);
+        }
+    }
+    if(document.readyState === 'complete' || document.readyState === 'interactive'){
+        r();
+    }else{
+        document.addEventListener('DOMContentLoaded', r);
+    }
+})();
 </script>
 </body>
 </html>
