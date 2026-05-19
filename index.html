@@ -256,8 +256,233 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-s
 </section>
 
 <!-- 2-й ЭКРАН: КВИЗ -->
-<section id="quiz-section" class="quiz-section">
-    <iframe src="https://dizelbot.github.io/granduchet-demo/quiz.html" style="width:100%;border:none;min-height:100vh;" id="quiz-frame"></iframe>
+<section id="quiz-section" class="quiz-section" style="padding:20px 0;">
+<link rel="stylesheet" href="https://dizelbot.github.io/granduchet-demo/assets/quiz.css">
+<div class="granduchet-quiz" itemscope itemtype="https://schema.org/Quiz">
+
+    <!-- СТАРТОВЫЙ ЭКРАН (ЛЕНДИНГ) -->
+    <div class="quiz-landing" style="display:flex;">
+        <!-- Треугольный паттерн бренда -->
+        <div class="quiz-landing-triangle quiz-landing-triangle-1"></div>
+        <div class="quiz-landing-triangle quiz-landing-triangle-2"></div>
+        <div class="quiz-landing-triangle quiz-landing-triangle-3"></div>
+        <div class="quiz-landing-triangle quiz-landing-triangle-4"></div>
+        <div class="quiz-landing-triangle quiz-landing-triangle-5"></div>
+        <div class="quiz-landing-triangle quiz-landing-triangle-6"></div>
+        <!-- Декоративная SVG-иллюстрация -->
+        <svg class="quiz-landing-illustration" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 10 L140 50 L130 100 L70 100 L60 50 Z" fill="#60A9B9" opacity="0.15"/>
+            <path d="M100 30 L125 65 L120 95 L80 95 L75 65 Z" fill="#9BCDE0" opacity="0.12"/>
+            <circle cx="50" cy="40" r="18" fill="#EFBBCF" opacity="0.15"/>
+            <circle cx="50" cy="40" r="10" fill="#EFBBCF" opacity="0.1"/>
+            <circle cx="150" cy="120" r="22" fill="#CEE0EE" opacity="0.15"/>
+            <rect x="145" y="25" width="20" height="20" rx="4" fill="#832926" opacity="0.08"/>
+            <rect x="35" y="105" width="16" height="16" rx="3" fill="#60A9B9" opacity="0.12"/>
+            <path d="M30 75 L45 60 L60 75 L45 90 Z" fill="#FFDDD2" opacity="0.15"/>
+            <line x1="100" y1="55" x2="100" y2="80" stroke="#832926" stroke-width="1.5" opacity="0.08"/>
+            <line x1="88" y1="70" x2="112" y2="70" stroke="#832926" stroke-width="1.5" opacity="0.08"/>
+        </svg>
+        <img
+            class="quiz-landing-logo"
+            src="/assets/logo-big.jpg"
+            alt="Гранд Учет"
+            width="200"
+            height="auto"
+            loading="lazy"
+        />
+        <h1>Тест «Оценка уровня цифровизации Вашего бизнеса»</h1>
+        <p>Оцените эффективность процессов за 3 минуты и получите персональные рекомендации по автоматизации от экспертов «Гранд Учет»</p>
+        <button type="button" class="quiz-btn-start" aria-label="Начать тест">Начать тест</button>
+    </div>
+
+    <!-- СТЕППЕР (горизонтальные интерактивные индикаторы) -->
+    <div class="quiz-stepper" style="display:none;">
+        <div class="quiz-step" data-step="0" role="button" tabindex="0">
+            <span class="quiz-step-num">1</span>
+            <span class="quiz-step-name">Финансы</span>
+        </div>
+        <div class="quiz-step" data-step="1" role="button" tabindex="0">
+            <span class="quiz-step-num">2</span>
+            <span class="quiz-step-name">Документы</span>
+        </div>
+        <div class="quiz-step" data-step="2" role="button" tabindex="0">
+            <span class="quiz-step-num">3</span>
+            <span class="quiz-step-name">Кадры</span>
+        </div>
+        <div class="quiz-step" data-step="3" role="button" tabindex="0">
+            <span class="quiz-step-num">4</span>
+            <span class="quiz-step-name">RPA</span>
+        </div>
+    </div>
+
+    <!-- БЛОК 1 -->
+    <div class="quiz-screen" data-block="1" role="tabpanel">
+        <div class="quiz-block-container"></div>
+    </div>
+
+    <!-- БЛОК 2 -->
+    <div class="quiz-screen" data-block="2" role="tabpanel">
+        <div class="quiz-block-container"></div>
+    </div>
+
+    <!-- БЛОК 3 -->
+    <div class="quiz-screen" data-block="3" role="tabpanel">
+        <div class="quiz-block-container"></div>
+    </div>
+
+    <!-- БЛОК 4 -->
+    <div class="quiz-screen" data-block="4" role="tabpanel">
+        <div class="quiz-block-container"></div>
+    </div>
+
+    <!-- ПОДСКАЗКА ДЛЯ СВАЙПА (мобильные) -->
+    <div class="quiz-swipe-hint" style="display:none;">
+        <span class="arrow">←</span> Проведите влево для продолжения <span class="arrow">→</span>
+    </div>
+
+    <!-- ФИНАЛЬНЫЙ ЭКРАН: ФОРМА ЗАХВАТА -->
+    <div class="quiz-final-screen" style="display:none;">
+        <div class="quiz-final-header">
+            <h2>Мы подготовим для вас персональные рекомендации</h2>
+            <p>Укажите, пожалуйста, куда прислать результат и контакты для связи</p>
+        </div>
+
+        <form class="quiz-final-form" novalidate autocomplete="on">
+            <!-- Имя -->
+            <div class="quiz-form-group">
+                <label class="quiz-form-label" for="quiz-name">
+                    Имя <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="quiz-name"
+                    class="quiz-form-input"
+                    name="name"
+                    placeholder="Ваше имя"
+                    maxlength="100"
+                    required
+                    data-error="quiz-name-error"
+                />
+                <div class="quiz-form-error" id="quiz-name-error"></div>
+            </div>
+
+            <!-- Компания -->
+            <div class="quiz-form-group">
+                <label class="quiz-form-label" for="quiz-company">
+                    Компания <span class="required">*</span>
+                </label>
+                <input
+                    type="text"
+                    id="quiz-company"
+                    class="quiz-form-input"
+                    name="company"
+                    placeholder="Название компании"
+                    maxlength="200"
+                    required
+                    data-error="quiz-company-error"
+                />
+                <div class="quiz-form-error" id="quiz-company-error"></div>
+            </div>
+
+            <!-- E-mail -->
+            <div class="quiz-form-group">
+                <label class="quiz-form-label" for="quiz-email">
+                    E-mail <span class="required">*</span>
+                </label>
+                <input
+                    type="email"
+                    id="quiz-email"
+                    class="quiz-form-input"
+                    name="email"
+                    placeholder="example@company.ru"
+                    required
+                    autocomplete="email"
+                    data-error="quiz-email-error"
+                />
+                <div class="quiz-form-error" id="quiz-email-error"></div>
+            </div>
+
+            <!-- Телефон -->
+            <div class="quiz-form-group">
+                <label class="quiz-form-label" for="quiz-phone">
+                    Телефон <span class="required">*</span>
+                </label>
+                <input
+                    type="tel"
+                    id="quiz-phone"
+                    class="quiz-form-input"
+                    name="phone"
+                    placeholder="+7 (___) ___-__-__"
+                    required
+                    autocomplete="tel"
+                    inputmode="numeric"
+                    data-error="quiz-phone-error"
+                />
+                <div class="quiz-form-error" id="quiz-phone-error"></div>
+            </div>
+
+            <!-- Согласие на обработку ПД -->
+            <div class="quiz-form-checkbox-group">
+                <label class="quiz-form-checkbox">
+                    <input type="checkbox" id="quiz-consent" checked data-error="quiz-consent-error" />
+                    <span class="quiz-checkbox-box"></span>
+                    <span class="quiz-checkbox-text">
+                        Даю согласие на обработку персональных данных в соответствии с
+                        <a href="/privacy-policy/" target="_blank" rel="noopener">Политикой обработки персональных данных</a>
+                        <span class="required">*</span>
+                    </span>
+                </label>
+                <div class="quiz-form-error" id="quiz-consent-error"></div>
+            </div>
+
+            <!-- Ознакомление с Политикой -->
+            <div class="quiz-form-checkbox-group">
+                <label class="quiz-form-checkbox">
+                    <input type="checkbox" id="quiz-policy" checked data-error="quiz-policy-error" />
+                    <span class="quiz-checkbox-box"></span>
+                    <span class="quiz-checkbox-text">
+                        Подтверждаю, что ознакомлен(а) с
+                        <a href="/privacy-policy/" target="_blank" rel="noopener">Политикой обработки персональных данных</a>
+                        <span class="required">*</span>
+                    </span>
+                </label>
+                <div class="quiz-form-error" id="quiz-policy-error"></div>
+            </div>
+
+            <!-- Кнопки -->
+            <div class="quiz-final-actions">
+                <button type="button" id="quiz-submit-report" class="quiz-btn-primary">
+                    Получить персональный отчет по цифровой зрелости бизнеса
+                </button>
+                <button type="button" id="quiz-submit-consult" class="quiz-btn-secondary">
+                    Получить персональную консультацию по автоматизации
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- ЭКРАН БЛАГОДАРНОСТИ -->
+    <div class="quiz-thankyou" style="display:none;">
+        <div class="quiz-thankyou-icon">✓</div>
+        <h2>Благодарим Вас за участие в опросе!</h2>
+        <p>Мы получили вашу заявку и свяжемся с вами в ближайшее время.</p>
+        <p>Персональные рекомендации будут направлены на указанный e-mail.</p>
+        <p class="small">С уважением, команда «Гранд Учет»</p>
+    </div>
+
+    <!-- НАВИГАЦИЯ -->
+    <div class="quiz-navigation" style="display:none;">
+        <button type="button" class="quiz-nav-back" aria-label="Назад" disabled>
+            ← Назад
+        </button>
+        <button type="button" class="quiz-nav-next" aria-label="Далее" disabled>
+            <span class="quiz-nav-next-text">Далее</span>
+            <span class="quiz-nav-next-arrow">→</span>
+        </button>
+    </div>
+
+</div>
+<script src="https://dizelbot.github.io/granduchet-demo/assets/quiz.js"></script>
 </section>
 
 <!-- ФУТЕР -->
@@ -266,24 +491,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-s
     <p style="margin-top:8px;color:#999;font-size:13px;">Демо-версия для ознакомления · Опросник «Оценка уровня цифровизации»</p>
 </footer>
 
-<!-- Автоподстройка высоты iframe -->
-<script>
-(function() {
-    var frame = document.getElementById('quiz-frame');
-    if (!frame) return;
-    function resize() {
-        try {
-            var doc = frame.contentDocument || frame.contentWindow.document;
-            var h = doc.documentElement.scrollHeight || doc.body.scrollHeight;
-            frame.style.minHeight = Math.max(h, 600) + 'px';
-        } catch(e) {}
-    }
-    frame.onload = resize;
-    window.addEventListener('resize', resize);
-    // Повтор через 1с и 3с (для динамической высоты квиза)
-    setTimeout(resize, 1000);
-    setTimeout(resize, 3000);
-})();
-</script>
+
 </body>
 </html>
