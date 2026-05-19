@@ -28,7 +28,7 @@ function granduchet_quiz_get_recipient_email(): string
     if (!empty($saved) && filter_var($saved, FILTER_VALIDATE_EMAIL)) {
         return $saved;
     }
-    return 'email@granduchet.ru';
+    return 'ivanova_av@granduchet.ru';
 }
 
 require_once GRANDUCHET_QUIZ_DIR . 'assets/quiz-handler.php';
@@ -269,7 +269,7 @@ class GrandUchetQuizPlugin
         register_setting('granduchet_quiz_settings', 'granduchet_quiz_recipient_email', [
             'type'              => 'string',
             'sanitize_callback' => 'sanitize_email',
-            'default'           => 'email@granduchet.ru',
+            'default'           => 'ivanova_av@granduchet.ru',
         ]);
     }
 
@@ -292,7 +292,7 @@ class GrandUchetQuizPlugin
                             <input type="email"
                                    id="granduchet_quiz_recipient_email"
                                    name="granduchet_quiz_recipient_email"
-                                   value="<?php echo esc_attr(get_option('granduchet_quiz_recipient_email', 'email@granduchet.ru')); ?>"
+                                   value="<?php echo esc_attr(get_option('granduchet_quiz_recipient_email', 'ivanova_av@granduchet.ru')); ?>"
                                    class="regular-text" required>
                             <p class="description"><?php _e('На этот адрес будут приходить заявки из квиза.', 'granduchet-quiz'); ?></p>
                         </td>
