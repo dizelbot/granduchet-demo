@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Гранд Учет — Бухгалтерские услуги</title>
+<link rel="icon" href="assets/favicon.ico">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #333; background: #fff; }
+
+/* ШАПКА */
+.site-header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: #fff; border-bottom: 1px solid #eee;
+    padding: 0 24px; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+}
+.site-logo { font-size: 22px; font-weight: 700; color: #832926; text-decoration: none; }
+.site-logo span { color: #60A9B9; }
+.site-nav { display: flex; gap: 24px; }
+.site-nav a { color: #555; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.site-nav a:hover, .site-nav a.active { color: #832926; }
+
+/* ========== БРЕНДОВАЯ АНИМАЦИЯ ========== */
+@keyframes tri-flow-1 {
+    0% { transform: rotate(15deg) translate(0, 0); opacity: 0.4; }
+    25% { transform: rotate(5deg) translate(-40px, 30px); opacity: 0.8; }
+    50% { transform: rotate(-10deg) translate(-80px, -20px); opacity: 0.3; }
+    75% { transform: rotate(10deg) translate(-20px, 50px); opacity: 0.7; }
+    100% { transform: rotate(15deg) translate(0, 0); opacity: 0.4; }
+}
+@keyframes tri-flow-2 {
+    0% { transform: rotate(-20deg) translate(0, 0); opacity: 0.5; }
+    25% { transform: rotate(-5deg) translate(50px, -30px); opacity: 0.9; }
+    50% { transform: rotate(15deg) translate(90px, 20px); opacity: 0.4; }
+    75% { transform: rotate(-10deg) translate(30px, -40px); opacity: 0.8; }
+    100% { transform: rotate(-20deg) translate(0, 0); opacity: 0.5; }
+}
+@keyframes tri-flow-3 {
+    0% { transform: rotate(45deg) translate(0, 0); opacity: 0.3; }
+    33% { transform: rotate(30deg) translate(30px, -40px); opacity: 0.7; }
+    66% { transform: rotate(60deg) translate(-30px, 20px); opacity: 0.5; }
+    100% { transform: rotate(45deg) translate(0, 0); opacity: 0.3; }
+}
+.hero-triangle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+}
+.hero-triangle-1 {
+    top: -30px; right: -20px;
+    width: 0; height: 0;
+    border-left: 120px solid transparent;
+    border-right: 120px solid transparent;
+    border-bottom: 200px solid rgba(96, 169, 185, 0.2);
+    animation: tri-flow-1 20s ease-in-out infinite;
+}
+.hero-triangle-2 {
+    bottom: 60px; left: -50px;
+    width: 0; height: 0;
+    border-left: 80px solid transparent;
+    border-right: 80px solid transparent;
+    border-bottom: 140px solid rgba(239, 187, 207, 0.25);
+    animation: tri-flow-2 25s ease-in-out infinite;
+}
+.hero-triangle-3 {
+    top: 30%; left: 5%;
+    width: 0; height: 0;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    border-bottom: 100px solid rgba(155, 205, 224, 0.18);
+    animation: tri-flow-3 22s ease-in-out infinite 3s;
+}
+.hero-triangle-4 {
+    top: 15%; right: 10%;
+    width: 0; height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 85px solid rgba(131, 41, 38, 0.15);
+    animation: tri-flow-1 18s ease-in-out infinite 1s;
+}
+.hero-triangle-5 {
+    bottom: 20%; right: 15%;
+    width: 0; height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 70px solid rgba(206, 224, 238, 0.25);
+    animation: tri-flow-2 28s ease-in-out infinite 5s;
+}
+.hero-triangle-6 {
+    top: 50%; right: 30%;
+    width: 0; height: 0;
+    border-left: 35px solid transparent;
+    border-right: 35px solid transparent;
+    border-bottom: 60px solid rgba(255, 221, 210, 0.25);
+    animation: tri-flow-3 16s ease-in-out infinite 2s;
+}
+
+/* HERO */
+.hero {
+    margin-top: 64px; min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #FDFAE2 0%, #FFDDD2 50%, #CEE0EE 100%);
+    padding: 80px 24px 60px;
+    text-align: center;
+    position: relative; overflow: hidden;
+}
+.hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(96,169,185,0.04) 40px, rgba(96,169,185,0.04) 41px);
+}
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+.hero h1 { font-size: 42px; font-weight: 700; color: #832926; margin-bottom: 12px; line-height: 1.15; }
+.hero p { font-size: 18px; color: #555; margin-bottom: 20px; }
+
+/* ПРЕИМУЩЕСТВА НА СТАРТОВОЙ */
+.hero-benefits {
+    display: flex;
+    gap: 20px;
+    max-width: 800px;
+    margin: 28px auto 36px;
+    position: relative; z-index: 1;
+}
+.hero-benefit {
+    flex: 1;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(96,169,185,0.2);
+    border-radius: 16px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.hero-benefit:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(131,41,38,0.08);
+}
+.hero-benefit-icon {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+.hero-benefit:nth-child(1) .hero-benefit-icon { background: rgba(96,169,185,0.15); }
+.hero-benefit:nth-child(2) .hero-benefit-icon { background: rgba(131,41,38,0.1); }
+.hero-benefit:nth-child(3) .hero-benefit-icon { background: rgba(155,205,224,0.2); }
+.hero-benefit h3 { font-size: 15px; font-weight: 600; color: #333; margin-bottom: 4px; }
+.hero-benefit p { font-size: 13px; color: #666; margin: 0; line-height: 1.4; }
+
+.hero-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 16px 40px; min-height: 56px;
+    font-size: 16px; font-weight: 700; color: #fff;
+    background: linear-gradient(135deg, #832926 0%, #a13530 100%);
+    border: none; border-radius: 12px; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(131,41,38,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    position: relative; z-index: 1;
+}
+.hero-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(131,41,38,0.4); }
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 28px; }
+    .hero p { font-size: 16px; }
+    .hero { min-height: auto; padding: 100px 20px 60px; }
+    .hero-benefits { flex-direction: column; gap: 12px; }
+    .hero-benefit { padding: 16px; }
+}
+.hero h1 { font-size: 42px; font-weight: 700; color: #832926; margin-bottom: 16px; line-height: 1.2; }
+.hero p { font-size: 18px; color: #555; margin-bottom: 32px; }
+.hero-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 16px 40px; min-height: 56px;
+    font-size: 16px; font-weight: 700; color: #fff;
+    background: linear-gradient(135deg, #832926 0%, #a13530 100%);
+    border: none; border-radius: 12px; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(131,41,38,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+}
+.hero-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(131,41,38,0.4); }
+
+/* УСЛУГИ */
+
+
+/* КВИЗ */
+.quiz-section { background: #fff; padding: 0; }
+
+/* ФУТЕР */
+.site-footer { padding: 48px 24px; background: #333; color: #ccc; text-align: center; font-size: 14px; }
+.site-footer a { color: #60A9B9; text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 28px; }
+    .hero p { font-size: 16px; }
+    .hero { min-height: 60vh; padding: 40px 20px; }
+    .site-nav { gap: 12px; }
+    .site-nav a { font-size: 12px; }
+
+}
+</style>
+</head>
+<body>
+
+<!-- ШАПКА -->
+<header class="site-header">
+    <a href="#" class="site-logo"><img src="assets/logo-granduchet.png" alt="Гранд Учет" style="height:36px;width:auto;"></a>
+    <nav class="site-nav">
+        <a href="#">Главная</a>
+        <a href="#">Услуги</a>
+        <a href="#">О нас</a>
+        <a href="#">Контакты</a>
+    </nav>
+</header>
+
+<!-- 1-й ЭКРАН: HERO -->
+<section class="hero">
+    <!-- Брендовые треугольники с анимацией -->
+    <div class="hero-triangle hero-triangle-1"></div>
+    <div class="hero-triangle hero-triangle-2"></div>
+    <div class="hero-triangle hero-triangle-3"></div>
+    <div class="hero-triangle hero-triangle-4"></div>
+    <div class="hero-triangle hero-triangle-5"></div>
+    <div class="hero-triangle hero-triangle-6"></div>
+
+    <div class="hero-content">
+        <h1>Бухгалтерские услуги<br>для вашего бизнеса</h1>
+        <p>Полный спектр бухгалтерского сопровождения: от постановки учёта до налогового планирования. 20 лет безупречной работы.</p>
+
+        <div class="hero-benefits">
+            <div class="hero-benefit">
+                <div class="hero-benefit-icon">📊</div>
+                <h3>Бухгалтерский учёт</h3>
+                <p>Полное ведение с использованием современных технологий</p>
+            </div>
+            <div class="hero-benefit">
+                <div class="hero-benefit-icon">📋</div>
+                <h3>Налоговое планирование</h3>
+                <p>Оптимизация нагрузки и минимизация рисков</p>
+            </div>
+            <div class="hero-benefit">
+                <div class="hero-benefit-icon">🔄</div>
+                <h3>Автоматизация</h3>
+                <p>Внедрение цифровых решений для повышения эффективности</p>
+            </div>
+        </div>
+
+        <a href="#quiz-section" class="hero-btn">Оценить цифровизацию →</a>
+    </div>
+</section>
+
+<!-- 2-й ЭКРАН: КВИЗ -->
+<section id="quiz-section" class="quiz-section">
+    <iframe src="quiz.html" style="width:100%;border:none;min-height:100vh;" id="quiz-frame"></iframe>
+</section>
+
+<!-- ФУТЕР -->
+<footer class="site-footer">
+    <p>© 2026 <a href="#">Гранд Учет</a> — профессиональные бухгалтерские услуги</p>
+    <p style="margin-top:8px;color:#999;font-size:13px;">Демо-версия для ознакомления · Опросник «Оценка уровня цифровизации»</p>
+</footer>
+
+<!-- Автоподстройка высоты iframe -->
+<script>
+(function() {
+    var frame = document.getElementById('quiz-frame');
+    if (!frame) return;
+    function resize() {
+        try {
+            var doc = frame.contentDocument || frame.contentWindow.document;
+            var h = doc.documentElement.scrollHeight || doc.body.scrollHeight;
+            frame.style.minHeight = Math.max(h, 600) + 'px';
+        } catch(e) {}
+    }
+    frame.onload = resize;
+    window.addEventListener('resize', resize);
+    // Повтор через 1с и 3с (для динамической высоты квиза)
+    setTimeout(resize, 1000);
+    setTimeout(resize, 3000);
+})();
+</script>
+</body>
+</html>
