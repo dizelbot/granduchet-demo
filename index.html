@@ -1593,6 +1593,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-s
        ИНИЦИАЛИЗАЦИЯ
        ============================================ */
     function init() {
+        window.granduchetInit = init;
         cacheDom();
 
         if (!els.landing || !els.startBtn) return;
