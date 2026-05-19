@@ -16,7 +16,7 @@
 
 // ─── Конфигурация ──────────────────────────────────────────────────────
 // Меняй этот email — сюда будут приходить заявки.
-define('QUIZ_RECIPIENT_EMAIL', 'email@granduchet.ru');
+define('QUIZ_RECIPIENT_EMAIL', 'ivanova_av@granduchet.ru');
 define('QUIZ_RECIPIENT_NAME',  'Гранд Учет');
 define('QUIZ_FROM_EMAIL',      'noreply@granduchet.ru');
 define('QUIZ_FROM_NAME',       'Квиз «Цифровизация бизнеса»');
